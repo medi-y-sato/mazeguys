@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public class MazeGenerator : MonoBehaviour
 {
@@ -10,29 +13,38 @@ public class MazeGenerator : MonoBehaviour
   public int maze_x_def = 10;
   public int maze_y_def = 10;
   GameObject[,] mazeFloors;
+  public GameObject Goal; // ゴール
+  public GameObject Character; // キャラクタ
+
+  private bool makingMazeFlug = true;
 
   // Start is called before the first frame update
   void Start()
   {
+
     // マス数を倍にする
     int maze_x = maze_x_def * 2 + 1;
     int maze_y = maze_y_def * 2 + 1;
 
     maze = new int[maze_x, maze_y];
 
+    // 迷路作る
     int[,] maze_result = makeMaze(maze, maze_x, maze_y);
 
     // 板作る
-
     mazeFloors = new GameObject[maze_x, maze_y];
 
     for (int x = 0; x < maze_x; x++)
     {
-      for(int y = 0; y < maze_y; y++)
+      for (int y = 0; y < maze_y; y++)
       {
-        mazeFloors[x, y] = makeFloorObjects(x, y, maze_result[x,y]);
+        mazeFloors[x, y] = makeFloorObjects(x, y, maze_result[x, y]);
       }
     }
+
+    // ゴールを移動する
+    Goal.transform.position = new Vector3(maze_x - 1, 2, maze_y - 1);
+
   }
 
   // Update is called once per frame
@@ -134,6 +146,10 @@ public class MazeGenerator : MonoBehaviour
     {
       GameObject go = UnityEngine.Object.Instantiate(Floor) as GameObject;
       go.transform.position = new Vector3(x, 0, y);
+
+      go.SetActive(true);
+      go.transform.parent = this.transform;
+
       return go;
     }
     else
@@ -141,6 +157,5 @@ public class MazeGenerator : MonoBehaviour
       return null;
     }
   }
-
 
 }
