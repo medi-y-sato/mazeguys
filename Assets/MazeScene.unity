@@ -156,7 +156,7 @@ MonoBehaviour:
     type: 3}
   MazeGeneratorObject: {fileID: 1173873847}
   GoalObject: {fileID: 1609059305}
-  MaxCharacter: 100
+  MaxCharacter: 20
 --- !u!4 &25997555
 Transform:
   m_ObjectHideFlags: 0

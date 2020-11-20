@@ -22,9 +22,7 @@ public class realTimeBaker : MonoBehaviour
   {
     while (true)
     {
-      _surface.BuildNavMesh();
-      Debug.Log("BuildNavMesh()");
-
+      bakeNow();
       yield return new WaitForSeconds(5.0f);
     }
   }
@@ -33,5 +31,11 @@ public class realTimeBaker : MonoBehaviour
   void Update()
   {
 
+  }
+
+  public void bakeNow()
+  {
+    _surface.BuildNavMesh();
+    Debug.Log("BuildNavMesh()");
   }
 }
