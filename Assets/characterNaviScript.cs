@@ -23,9 +23,28 @@ public class characterNaviScript : MonoBehaviour
     if (m_navMeshAgent.pathStatus != NavMeshPathStatus.PathInvalid)
     {
       // NavMeshAgentに目的地をセット
-      bool result = m_navMeshAgent.SetDestination(GoalObject.transform.position);
-      Debug.Log("NavMeshPathStatus : " + m_navMeshAgent.pathStatus);
+      m_navMeshAgent.SetDestination(GoalObject.transform.position);
     }
 
+  }
+
+  private void OnTriggetEnter(Collider other)
+  {
+    //接触したオブジェクトのタグが"Respawn"もしくは"Finish"のとき
+    if (other.CompareTag("Respawn") || other.CompareTag("Finish"))
+    {
+      // 消え去る
+      Destroy(this.gameObject);
+    }
+  }
+
+  private void OnTriggerStay(Collider other)
+  {
+    //接触したオブジェクトのタグが"Respawn"もしくは"Finish"のとき
+    if (other.CompareTag("Respawn") || other.CompareTag("Finish"))
+    {
+      // 消え去る
+      Destroy(this.gameObject);
+    }
   }
 }

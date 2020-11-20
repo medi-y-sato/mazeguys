@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.AI;
 
 
 public class MazeGenerator : MonoBehaviour
@@ -16,11 +13,13 @@ public class MazeGenerator : MonoBehaviour
   public GameObject Goal; // ゴール
   public GameObject Character; // キャラクタ
 
-  private bool makingMazeFlug = true;
+  public bool makingMazeFlug = false;
 
   // Start is called before the first frame update
   void Start()
   {
+
+    makingMazeFlug = false;
 
     // マス数を倍にする
     int maze_x = maze_x_def * 2 + 1;
@@ -43,7 +42,10 @@ public class MazeGenerator : MonoBehaviour
     }
 
     // ゴールを移動する
-    Goal.transform.position = new Vector3(maze_x - 1, 2, maze_y - 1);
+    Goal.transform.position = new Vector3(maze_x - 1, 0, maze_y - 1);
+
+    // 迷路準備完了
+    makingMazeFlug = true;
 
   }
 
